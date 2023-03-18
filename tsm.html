@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="image/png" href="rutwik.jpg" rel="icon">
+    <title>TSM Panic Alaram</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #243b55;
+        }
+
+        .container {
+            margin: 0 auto;
+            width: 450px;
+            height: 400px;
+            background: #fff;
+            border-radius: 7px;
+            margin-top: 150px;
+        }
+
+        #alaram {
+            text-align: center;
+            transform: translateY(40px);
+            color: #fff;
+            font-family: sans-serif;
+        }
+
+        .main {
+            background-color: #070d68;
+            color: #EFD0CA;
+            font-size: 20px;
+            text-align: center;
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            margin:  0 auto;
+            transform: translateY(25%);
+        }
+    #timer{
+        font-size: 50px;
+        position: relative;
+        top: 90px;
+        
+    }
+    #reset{
+        width: 150px;
+        height: 40px;
+        margin-top: 90px;
+        transform: translateX(150px);
+        border-radius: 2px;
+        border: none;
+        background: #d00a0a;
+        color: #fff;
+        font-family: sans-serif;
+        font-weight: 600;
+        font-size:17px ;
+
+    }
+    #reset:hover{
+        background: #000000;
+        color: #fff;
+        cursor: pointer;
+
+    }
+    audio{
+        display: none;
+     
+    }
+    /* responsive */
+    @media (min-width:300px) and (max-width:600px){
+        .container {
+            margin: 0 auto;
+            width: 300px;
+            height: 400px;
+            background: #fff;
+            border-radius: 7px;
+            margin-top: 150px;
+        }
+        #reset{
+        width: 100px;
+        height: 40px;
+        margin-top: 90px;
+        transform: translateX(104px);
+        border-radius: 2px;
+        border: none;
+        background: #d00a0a;
+        color: #fff;
+        font-family: sans-serif;
+        font-weight: 600;
+        font-size:17px ;
+
+    }
+
+    }
+
+    </style>
+</head>
+
+<body>
+    <h1 id="alaram">TSM Panic Alaram</h1>
+    <div class="container">
+        
+        <div class="main"> <span id="timer">
+            
+        </span></div>
+        <input type="button" value="Reset" id="reset" onclick="resetbtn()">
+        
+        <audio  controls id="audio" >
+            <source src="alarm.mp3" type="audio/mp3">
+        </audio>
+
+        <script>
+            document.getElementById('timer').innerHTML =
+                01 + ":" + 11;
+            startTimer();
+
+
+            function startTimer() {
+                var presentTime = document.getElementById('timer').innerHTML;
+                var timeArray = presentTime.split(/[:]+/);
+                var m = timeArray[0];
+                var s = checkSecond((timeArray[1] - 1));
+                if (s == 10) { m = m - 1 }
+                if (m < 0) {
+                    return
+                }
+
+                document.getElementById('timer').innerHTML =
+                    m + ":" + s;
+                console.log(m)
+                setTimeout(startTimer, 1000);
+
+            }
+
+            function checkSecond(sec) {
+                if (sec < 10 && sec >= 0) { sec = "0" + sec }; // add zero in front of numbers < 10
+                if (sec < 0) {
+                     sec = "10"
+                    //  alert("Savdhan Ho Jao")
+                      let main = document.getElementById("audio");
+                      main.play();
+
+
+                     };
+                return sec;
+               
+            }
+
+
+            const resetbtn = ()=>{
+                window.location.reload()
+            }
+        </script>
+
+</body>
+
+
+</html>
